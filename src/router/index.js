@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import RTgame from './game'
+import Battleship from '@/pages/Index'
 
 Vue.use(Router)
 
-const routes = [...RTgame]
-
-const router = new Router({
+export default new Router({
   mode: 'history',
-  linkActiveClass: 'is-active',
-  routes
+  routes: [
+    {
+      path: '*',
+      name: 'PhilVueBattleship',
+      component: Battleship,
+    }
+  ]
 })
-
-export default router

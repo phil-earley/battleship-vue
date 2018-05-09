@@ -1,0 +1,1180 @@
+@import '_globals.less';
+@import '_animations.less';
+
+#root {
+  section#header {
+    background: url("../assets/header-bg.png") center top repeat-x;
+    min-height: 30%;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:70%;
+    background-size: 15%;
+    animation: fade-in-top 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+    #logo {
+      background: url("../assets/logo.png") center center no-repeat;
+      background-size: contain;
+      width: 100%;
+      min-height: 150px;
+      position: absolute;
+      z-index: 2;
+      top: 40%;
+      filter: drop-shadow(0px 10px 4px #000);
+      animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    }
+
+    #carrier {
+      background: url("../assets/header-battleship.png") #051933 center center no-repeat;
+      background-size: cover;
+      top: 15px;
+      width: 100%;
+      min-height: 100%;
+      display: block;
+      position: absolute;
+      animation: fade-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+  }
+  section#game {
+    animation: fade-in 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    background: url('../assets/metal-plate-texture.png') repeat;
+    z-index: 2;
+    display:flex;
+    width: 100%;
+    overflow: visible;
+    position: absolute;
+    min-height: 70%;
+    max-height: 70%;
+    bottom: 0;
+    top: 30%;
+    left: 0;
+    right: 0;
+    padding: 0 0 0 0;
+    background: url('../assets/metal-plate-texture.png') repeat;
+    background-size: 15%;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    -webkit-filter: brightness(1.8);
+    filter: brightness(1.0);
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1), 0 2px rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    color: #000000;
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(95, 136, 136, 0.42), 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    #gameBoard {
+      display: flex;
+      flex: 2;
+
+      .room-container {
+        position: fixed;
+        top:0;
+        width: 100%;
+        background-size: 15%;
+        font-family: 'Roboto Condensed', sans-serif;
+        background: url('../assets/metal-plate-texture.png') repeat;
+        background-size: 15%;
+        text-transform: uppercase;
+        filter: brightness(1.5);
+        box-shadow: inset 0 -1px rgba(0,0,0, 0.1), 0 2px rgba(0, 0, 0, 0.5);
+        font-size: 20px;
+        color: rgba(0,0,0,1);
+        font-weight: 900;
+        text-shadow: 0 2px 10px rgba(95, 136, 136, 0.42), 0 2px 0 rgba(255, 255, 255, 0.1);
+
+        &::before {
+          content: '';
+          background: #161919;
+          -webkit-transform: skewX(-20deg);
+          transform: skewX(5deg);
+          border-left: none;
+          position: absolute;
+          left: -4px;
+          top: 0;
+          height: 100%;
+          width: 7px;
+        }
+
+        &::after {
+          content: '';
+          background: #161919;
+          transform: skewX(-5deg);
+          border-left: none;
+          position: absolute;
+          right: -4px;
+          top: 0;
+          height: 100%;
+          width: 7px;
+        }
+
+        input#room {
+          padding: 0;
+          border-radius: 2px;
+          margin-left: 5px;
+          width: auto;
+        }
+
+        h4 {
+          font-size: 18px;
+          display: flex;
+
+          .connected {
+            flex: 2;
+            color: #3d5a5a;
+            padding: 15px;
+            text-transform: none;
+          }
+
+          .green-glow {
+            flex: 1;
+            margin: 15px;
+            float: right;
+            display:flex;
+
+            input {
+              flex: 2;
+            }
+          }
+        }
+      }
+
+      #chat {
+        display:flex;
+        flex: 1;
+        width: 20%;
+        background: rgba(0,0,0,.75);
+        position: relative;
+        padding: 15px;
+        box-shadow: inset 0 0px 20px 1px rgba(0, 0, 0, 0.19), inset 0 -10px 8px rgba(0, 0, 0, 0.75), 0 0 24px rgba(0,0,0,.8);
+        filter: brightness(1.2);
+        z-index: 3;
+        animation: open-chat 1.6s 2s forwards;
+        max-height: 640px;
+        overflow:auto;
+
+        .list__tile__sub-title {
+          white-space:normal;
+        }
+
+        #statusMessage {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          padding: 8px 5px;
+          background: url('../assets/metal-plate-texture.png') repeat;
+          background-size: 65%;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.19), 0 3px 8px rgba(0, 0, 0, 0.75);
+          filter: brightness(1);
+          z-index: 1;
+          text-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.19), 0 7px 8px rgba(0, 0, 0, 0.75);
+
+          .list__tile__sub-title {
+            color: #fff;
+          }
+
+          .avatar {
+            font-style: normal;
+            font-size: 14px;
+            background: linear-gradient(#000000 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 7px 5px;
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.89), inset 0 -1px 0 rgb(89, 115, 115), inset 0 0 2px #000000, inset 0 0 0px #000000, 0 -3px 3px #000000;
+            color: #42b983;
+            text-shadow: 0 0 0px #42b983, 0 1px 5px #42b983, 0 0 3px rgba(30, 155, 228, 0);
+            border-radius: 60px;
+            -webkit-background-clip: initial;
+          }
+        }
+
+        #chatBox {
+          position: absolute;
+          top: 63px;
+          left: 0;
+          right: 0;
+          bottom: 83px;
+          padding: 25px 25px 75px 25px;
+          background: url('../assets/metal-plate-texture.png') repeat;
+          background-size: 60%;
+          filter: brightness(1.4);
+          overflow: auto;
+
+          // &::before {
+          //   content: '';
+          //   position: absolute;
+          //   top: 0;
+          //   left: 0;
+          //   right: 0;
+          //   bottom: 0;
+          //   background: linear-gradient(#000000,#333);
+          //   mix-blend-mode: difference;
+          //   opacity: .8;
+          //   box-shadow: inset 0 0 2px rgba(255, 140, 140, 0.25), 0 0 2px rgba(0,0,0,.5);
+          //   pointer-events: none;
+          // }
+
+          .message {
+            background: linear-gradient(rgba(0,0,0,.2),rgba(6, 4, 4, 0.5));
+            border-radius: 1px;
+            box-shadow: inset 0 1px rgba(91, 141, 167, 0.32), inset 0 -1px rgba(138, 110, 110, 0.17), 0 4px 13px 1px rgb(0, 0, 0);
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.5411764705882353);
+            font-weight: bold;
+            font-family: 'Liberator', sans-serif;
+
+            .list__tile {
+              height: auto;
+              white-space: normal;
+              padding: 15px;
+            }
+
+            &.you {
+              margin-right: 15px;
+              background: linear-gradient(rgba(30, 78, 93, 0.2), rgba(6, 4, 4, 0.5));
+              border-radius: 0;
+
+              .avatar {
+                -webkit-mask: url("../assets/ico_user.svg") no-repeat;
+                background-size: cover;
+                background-color: #42b983;
+                border-radius: 0;
+                position: absolute;
+                left: 15px;
+                top: 15px;
+              }
+            }
+
+            &.opponent {
+              margin-left: 15px;
+              background: linear-gradient(rgba(93, 30, 30, 0.2), rgba(6, 4, 4, 0.5));
+              border-radius: 0;
+
+              .avatar {
+                -webkit-mask: url("../assets/ico__enemy.svg") no-repeat;
+                background-size: cover;
+                background-color: #b942b5;
+                border-radius: 0;
+                position: absolute;
+                left: 15px;
+                top: 15px;
+              }
+            }
+
+            &.battlebot {
+              margin: 0 -25px 15px;
+              width: calc(100% + 50px);
+              mix-blend-mode: normal;
+              position: relative;
+              outline: none;
+              border: none;
+              color: #33333321;
+              text-shadow: rgb(255, 255, 255) 0 -1px 0, rgb(15, 15, 14) 0 2px 1px;
+              background-color: #080606d6;
+              box-shadow: inset rgba(47, 47, 47, 0) 0 1px 1px 0px, inset rgba(0, 0, 0, 0.88) 0 -4px 0px 2px, inset rgba(152, 108, 108, 0.19) 0 -2px 0px 1px;
+              padding: 15px 0;
+              transition: color .2s;
+              border-radius: 0;
+
+              .avatar {
+                -webkit-mask: url("../assets/ico_user.svg") no-repeat;
+                background-size: cover;
+                background-color: #42b983;
+                border-radius: 0;
+              }
+
+              &::after {
+                /* fake conical gradients */
+                content: "";
+                top: 0;
+                left: 0;
+                position: absolute;
+                width: inherit;
+                height: inherit;
+                border-radius: inherit;
+
+                background-image: -webkit-radial-gradient(  50%   0%, 10% 50%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+                  -webkit-radial-gradient(  50% 100%, 10% 50%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+                  -webkit-radial-gradient(   0%  50%, 50% 10%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+                  -webkit-radial-gradient( 100%  50%, 50% 06%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%);
+              }
+            }
+          }
+        }
+
+        .newMessage {
+          position: absolute;
+          bottom: 0;
+          display: flex;
+          left: 0;
+          right: 0;
+          padding: 0 15px;
+          padding: 10px 15px 0px 15px;
+          background: url('../assets/metal-plate-texture.png') repeat;
+          background-size: 65%;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.19), inset 0 -10px 8px rgba(0, 0, 0, 0.75);
+          filter: brightness(1.4);
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(#333, #000);
+            mix-blend-mode: difference;
+            opacity: .8;
+            box-shadow: inset 0 0 2px rgba(255, 140, 140, 0.25), 0 0 2px rgba(0,0,0,.5);
+          }
+        }
+
+        .waiting {
+          height: 100%;
+          width: 108%;
+          -webkit-mask: url('../assets/ico_timer.svg') no-repeat 50% 50%;
+          background-color: #42b983;
+        }
+      }
+
+      #opponent .sonar::before {
+        transform: skewY(4deg);
+      }
+      #player .sonar::before {
+        transform: skewY(-4deg);
+      }
+
+      #opponent {
+        .sonar {
+          span.hit {
+            background: rgba(0, 0, 0, 0.72) no-repeat;
+            border-radius: 0 !important;
+
+            &.me {
+              background: url('../assets/sprites/ship_medium_body.png') center no-repeat;
+              background-size: 150%;
+            }
+          }
+        }
+      }
+
+      #player,
+      #opponent {
+        background: url('../assets/metal-plate-texture.png') repeat;
+        z-index: 2;
+        flex:2;
+        box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.25);
+        overflow:hidden;
+        max-height: 640px;
+
+        h4 {
+          font-family: 'Liberator', sans-serif;
+          text-transform: uppercase;
+          // background: url('../assets/metal-plate-texture.png') repeat;
+          background-image: linear-gradient(
+            #b4bdc4,
+            #d7dee2,
+            #728190,
+            #d6dbe0
+            );
+          // background-size: 60%;
+          // filter: brightness(1.8);
+          filter: brightness(1.1);
+          font-size: 30px;
+          font-weight: 900;
+          padding: 10px;
+          text-shadow: 0 2px 10px rgba(95, 136, 136, 0.42), 0 2px 0 rgba(255, 255, 255, 0.1);
+          // color: #42b98359;
+          // text-shadow: 0 0 6px #42b983c2;
+          color: transparent;
+          position: relative;
+
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          i.connection-type {
+            position: absolute;
+            top: 18px;
+            right: 16px;
+            font-style: normal;
+            font-size: 14px;
+            background: linear-gradient(#000000 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 5px 15px;
+            mix-blend-mode: unset;
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.89), inset 0 -1px 0 rgba(95, 117, 117, 0.53), inset 0 0 2px #000000, inset 0 0 0px #000000, 0 -3px 3px #000000;
+            color: rgb(66, 185, 131);
+            text-shadow: 0 0 0px rgb(66, 185, 131), 0 1px 5px #42b983, 0 0 3px rgba(30, 155, 228, 0);
+            border-radius: 60px;
+            -webkit-background-clip: initial;
+          }
+        }
+
+        .sonar {
+          background: url('../assets/ocean-map.png') no-repeat;
+          background-size: cover;
+          padding-left:25px;
+          height: 500px;
+          border-radius: 6px;
+          display: flex;
+          position: relative;
+          overflow: hidden;
+
+          .rotate {
+            height: 40px;
+            width: 38%;
+            position: fixed;
+            background: rgba(0, 0, 0, 0.36);
+            z-index: 3;
+            display: block;
+            margin-top: 0;
+            text-align: center;
+            color: #fff;
+            line-height: 43px;
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.42);
+            mix-blend-mode: overlay;
+            box-shadow: none;
+            filter: blur(2px);
+            pointer-events: none;
+          }
+
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(transparent 0%, rgba(0, 0, 0, 0.33) 80%, rgba(0, 0, 0, 0.98) 100%);
+          }
+
+          .grid-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            &:first-child::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              background: url('../assets/metal-plate-texture.png') repeat;
+              padding: 5px 0;
+              background-size: 575%;
+              filter: brightness(0.75) saturate(0.8) contrast(0.99) drop-shadow(1px 1px 1px rgba(0,0,0,.5));
+              margin: 0;
+              box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.63), inset 0 1px 2px rgba(255, 255, 255, 0.56), inset 0 2px 2px rgba(0, 0, 0, 0.64);
+              z-index: 2;
+              width: 27px;
+              height: 32px;
+            }
+
+            &::before {
+              content: attr(data-column);
+              text-align: center;
+              font-weight: bold;
+              background: url(/static/img/metal-plate-texture.7f555ad.png) repeat;
+              padding: 5px 0;
+              background-size: 265%;
+              filter: brightness(1.4) saturate(0.8);
+              margin: 0;
+              box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.81), inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 2px 2px rgba(0, 0, 0, 0.8);
+              z-index: 2;
+              width: 100%;
+            }
+
+            &:first-child {
+              span {
+                &::after {
+                  content: attr(data-row);
+                  display: block;
+                  width: 15px;
+                  position: absolute;
+                  left: 3px;
+                  z-index: 1;
+                  color: #ffffff8a;
+                  background: url(/static/img/metal-plate-texture.7f555ad.png) repeat;
+                  padding: 0;
+                  background-size: 265%;
+                  filter: brightness(1.4) saturate(0.8);
+                  margin: 0px 0px 2px -3px;
+                  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.81), inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 2px 2px rgba(0, 0, 0, 0.8);
+                  z-index: 2;
+                  width: 26px;
+                  background-size: 1150%;
+                }
+              }
+            }
+
+            span {
+              height: 12.5%;
+              width: 100%;
+              box-shadow: inset 0 0 7px 1px rgba(94, 158, 149, 0.1), 0 0 14px 1px rgba(67, 170, 210, 0.3);
+              border: none;
+              border-radius: 10px;
+              cursor: pointer;
+              transition: all 250ms linear;
+              text-align: center;
+              line-height: 55px;
+              vertical-align: middle;
+              color: #70e0ff24;
+              font-weight: bold;
+              font-size: 16px;
+
+              &.me {
+                .ship-container{
+                  // background: url('../assets/sprites/boat-water-medium-anim.png') left center no-repeat;
+                  // animation: ship-water 1s steps(5) infinite;
+                  height: 100%;
+                  width:100%;
+                  display:block;
+                  background-size: cover;
+                  position: relative;
+
+                  .ship {
+                    &::after {
+                      content: '';
+                      background: url('../assets/sprites/ship_medium_body.png') center no-repeat;
+                      display: block;
+                      height: 100%;
+                      width: 100%;
+                      position: initial;
+                    }
+                  }
+                }
+
+                &.hit {
+                  .ship-container{
+                    .ship {
+                      &::after {
+                        content: '';
+                        background: url('../assets/sprites/ship_medium_body_destroyed.png') center no-repeat;
+                      }
+                    }
+                  }
+                }
+                &.back {
+                  .ship-container {
+                    .ship {
+                      &::after {
+                        background-position: top center;
+                      }
+                    }
+                  }
+                }
+
+                &.front {
+                  .ship-container {
+                    .ship {
+                      &::after {
+                        background-position: bottom center;
+                      }
+                    }
+                  }
+                }
+
+                &.horizontal {
+                  .ship-container {
+                    .ship {
+                      &::after {
+                        content: '';
+                        background: url('../assets/sprites/ship_medium_body-h.png') center no-repeat;
+                        height: 100%;
+                      }
+                    }
+                  }
+                  &.front {
+                    .ship-container {
+                      .ship {
+                        &::after {
+                          background-position: center right;
+                        }
+                      }
+                    }
+                  }
+                  &.back {
+                    .ship-container {
+                      .ship {
+                        &::after {
+                          background-position: center left;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.hover > .hover::after {
+                width: 15px;
+                height: 15px;
+                display: block;
+                border: 3px solid rgba(97, 216, 247, 0.57);
+                content: '';
+                opacity: 1;
+                text-shadow: none;
+                background: #fff;
+                border-radius: 50px;
+                position: relative;
+                margin: 21px 27px;
+                box-shadow: inset 0 0 13px 2px #3b9cc1, 0 0 13px 7px rgba(95, 206, 249, 0.78);
+                transition: opacity 250ms linear;
+                position: absolute;
+                z-index: 2;
+              }
+              &.hover.isError > .hover::after {
+                box-shadow: inset 0 0 13px 2px #ce364f, 0 0 13px 7px rgba(249, 95, 109, 0.78);
+                border-color: #8a1515;
+              }
+
+              &:hover {
+                background: rgba(0,0,0,.5);
+                box-shadow: none;
+                position: relative;
+
+                &::before {
+                  // content: '';
+                  // width: 100%;
+                  // height: 1600%;
+                  // background: rgba(53, 145, 165, 0.56);
+                  // display: block;
+                  // transform: translateY(-50%);
+                  // // box-shadow: inset 0 0 40px 22px rgba(0, 0, 0, 0.53);
+                  // transition: all 200ms ease;
+                  // pointer-events: none;
+                  // position: absolute;
+                  // left: 0;
+                  // top: 0;
+                }
+                &::after {
+                  // content: '';
+                  // width: 1600%;
+                  // height: 100%;
+                  // background: rgba(53, 145, 165, 0.56);
+                  // display: block;
+                  // transform: translateX(-50%);
+                  // // box-shadow: inset 0 0 40px 22px rgba(0, 0, 0, 0.53);
+                  // transition: all 200ms ease;
+                  // pointer-events: none;
+                  // position: absolute;
+                  // position: absolute;
+                  // left: 0;
+                  // top: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .ships {
+          height: 80px;
+
+          > ul {
+            display: flex;
+            margin: 0 auto;
+            text-align: center;
+            flex: 1;
+            height: 80px;
+            padding: 0px;
+            font-style: normal;
+            font-size: 18px;
+            background: linear-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.32) 40%);
+            background-blend-mode: overlay;
+            -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.19), inset 0 -1px 0 rgba(255, 255, 255, 0.19), inset 0 0 2px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.19), inset 0 -1px 0 rgba(255, 255, 255, 0.19), inset 0 0 2px rgba(0, 0, 0, 0.5);
+            color: #42b98359;
+            text-shadow: 0 0 6px #42b983c2;
+            border-radius: 6px;
+            overflow: hidden;
+
+            > li {
+              background: linear-gradient(rgba(34, 45, 45, 0.52), rgba(0, 0, 0, 0.8));
+              display: inline-block;
+              flex: 1;
+              padding: 0;
+              border-right: 1px solid rgba(36, 53, 53, 0.51);
+              margin: 1px 0;
+              color: #ffffff8a;
+              background: url(/static/img/metal-plate-texture.7f555ad.png) repeat;
+              filter: brightness(1.4) saturate(0.8);
+              box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.81), inset 0 0px 2px rgba(255, 255, 255, 0.25), inset -1px 1px 0px rgba(0, 0, 0, 0.95);
+              z-index: 2;
+              width: 26px;
+              background-size: 310%;
+              height: 85px;
+              line-height: 50px;
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &.empty {
+                filter: brightness(0.7) saturate(0.8);
+                cursor: not-allowed;
+              }
+
+              .ship-icons {
+                display: block;
+                background: #00000059;
+                height: 25px;
+                display: flex;
+                flex: 1;
+                border-radius: 0;
+                margin: 0;
+                border-right: 1px solid rgba(255, 255, 255, 0.18);
+
+                &.carrier {
+                  &::after {
+                    content: '';
+                    background: url("../assets/sprites/ship_large_body.png") center no-repeat;
+                  }
+                }
+                i {
+                  display: block;
+                  background: #00000059;
+                  height: 100%;
+                  display: inline-block;
+                  flex: 1 1 auto;
+                  border-radius: 0;
+                  margin: 0;
+                  border-right: 1px solid rgba(255, 255, 255, 0.18);
+                }
+
+              }
+              .ship-title {
+                font-size: 1vw;
+                text-align: center;
+                display:inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    @keyframes open-chat {
+      0% {
+        flex: 0;
+        width: 1%;
+        overflow: hidden;
+        transition: all 250ms linear;
+      }
+      100% {
+        flex: 1;
+        width: 20%;
+        overflow: hidden;
+        transition: all 250ms linear;
+      }
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: normal;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+      }
+    }
+
+    a {
+      color: #42b983;
+    }
+
+    /*----------- water ---------------*/
+    @keyframes ship-water {
+      100% {
+        background-position: -270px;
+      }
+    }
+
+    /* ---------- Fog ---------- */
+    .fogwrapper {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      // -webkit-filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+      // filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+    }
+
+    #foglayer_01,
+    #foglayer_02,
+    #foglayer_03 {
+      height: 100%;
+      position: absolute;
+      width: 200%;
+    }
+
+    #foglayer_01 .image01,
+    #foglayer_01 .image02,
+    #foglayer_02 .image01,
+    #foglayer_02 .image02,
+    #foglayer_03 .image01,
+    #foglayer_03 .image02 {
+      float: left;
+      height: 100%;
+      width: 50%;
+    }
+
+    #foglayer_01 {
+      animation: foglayer_01_opacity 30s linear infinite, foglayer_moveme 15s linear infinite;
+    }
+
+    #foglayer_02,
+    #foglayer_03 {
+      animation: foglayer_02_opacity 31s linear infinite, foglayer_moveme 13s linear infinite;
+    }
+    /* ---------- Moving Fog ---------- */
+    /*
+      'size: cover' || 'size: 100%'; results remain the same
+      'attachment: scroll' can be added or removed; results remain the same
+      'attachment: fixed' causing unexpected results in Chrome
+      'repeat-x' || 'no-repeat'; results remain the same
+    */
+    #foglayer_01 .image01,
+    #foglayer_01 .image02 {
+      background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png") center center/cover no-repeat transparent;
+    }
+
+    #foglayer_02 .image01,
+    #foglayer_02 .image02,
+    #foglayer_03 .image01,
+    #foglayer_03 .image02 {
+      background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png") center center/cover no-repeat transparent;
+    }
+    /* ---------- Keyframe Layer 1 ---------- */
+    @-webkit-keyframes foglayer_01_opacity {
+      0% {
+        opacity: 0.1;
+      }
+
+      22% {
+        opacity: 0.5;
+      }
+
+      40% {
+        opacity: 0.28;
+      }
+
+      58% {
+        opacity: 0.4;
+      }
+
+      80% {
+        opacity: 0.16;
+      }
+
+      100% {
+        opacity: 0.1;
+      }
+    }
+    @-moz-keyframes foglayer_01_opacity {
+      0% {
+        opacity: 0.1;
+      }
+
+      22% {
+        opacity: 0.5;
+      }
+
+      40% {
+        opacity: 0.28;
+      }
+
+      58% {
+        opacity: 0.4;
+      }
+
+      80% {
+        opacity: 0.16;
+      }
+
+      100% {
+        opacity: 0.1;
+      }
+    }
+    @-o-keyframes foglayer_01_opacity {
+      0% {
+        opacity: 0.1;
+      }
+
+      22% {
+        opacity: 0.5;
+      }
+
+      40% {
+        opacity: 0.28;
+      }
+
+      58% {
+        opacity: 0.4;
+      }
+
+      80% {
+        opacity: 0.16;
+      }
+
+      100% {
+        opacity: 0.1;
+      }
+    }
+    @keyframes foglayer_01_opacity {
+      0% {
+        opacity: 0.1;
+      }
+
+      22% {
+        opacity: 0.5;
+      }
+
+      40% {
+        opacity: 0.28;
+      }
+
+      58% {
+        opacity: 0.4;
+      }
+
+      80% {
+        opacity: 0.16;
+      }
+
+      100% {
+        opacity: 0.1;
+      }
+    }
+    /* ---------- Keyframe Layer 2 ---------- */
+    @-webkit-keyframes foglayer_02_opacity {
+      0% {
+        opacity: 0.5;
+      }
+
+      25% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.1;
+      }
+
+      80% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+    @-moz-keyframes foglayer_02_opacity {
+      0% {
+        opacity: 0.5;
+      }
+
+      25% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.1;
+      }
+
+      80% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+    @-o-keyframes foglayer_02_opacity {
+      0% {
+        opacity: 0.5;
+      }
+
+      25% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.1;
+      }
+
+      80% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+    @keyframes foglayer_02_opacity {
+      0% {
+        opacity: 0.5;
+      }
+
+      25% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.1;
+      }
+
+      80% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+    /* ---------- Keyframe Layer 3 ---------- */
+    @-webkit-keyframes foglayer_03_opacity {
+      0% {
+        opacity: 0.8;
+      }
+
+      27% {
+        opacity: 0.2;
+      }
+
+      52% {
+        opacity: 0.6;
+      }
+
+      68% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.8;
+      }
+    }
+    @-moz-keyframes foglayer_03_opacity {
+      0% {
+        opacity: 0.8;
+      }
+
+      27% {
+        opacity: 0.2;
+      }
+
+      52% {
+        opacity: 0.6;
+      }
+
+      68% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.8;
+      }
+    }
+    @-o-keyframes foglayer_03_opacity {
+      0% {
+        opacity: 0.8;
+      }
+
+      27% {
+        opacity: 0.2;
+      }
+
+      52% {
+        opacity: 0.6;
+      }
+
+      68% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.8;
+      }
+    }
+    @keyframes foglayer_03_opacity {
+      0% {
+        opacity: 0.8;
+      }
+
+      27% {
+        opacity: 0.2;
+      }
+
+      52% {
+        opacity: 0.6;
+      }
+
+      68% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0.8;
+      }
+    }
+    /* ---------- Keyframe moveMe ---------- */
+    @-webkit-keyframes foglayer_moveme {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: -100%;
+      }
+    }
+    @-moz-keyframes foglayer_moveme {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: -100%;
+      }
+    }
+    @-o-keyframes foglayer_moveme {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: -100%;
+      }
+    }
+    @keyframes foglayer_moveme {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: -100%;
+      }
+    }
+    @media only screen and (min-width: 280px) and (max-width: 767px) {
+      #foglayer_01 .image01,
+      #foglayer_01 .image02,
+      #foglayer_02 .image01,
+      #foglayer_02 .image02,
+      #foglayer_03 .image01,
+      #foglayer_03 .image02 {
+        width: 100%;
+      }
+    }
+  }
+}
