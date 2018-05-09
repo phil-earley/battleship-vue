@@ -1,4 +1,4 @@
-![ss-bw.jpg](https://github.com/phil-earley/battleship-vue-sockets/blob/master/screenshots/battleship-vue-sockets.png?raw=true)  
+![ss-bw.jpg](https://github.com/phil-earley/battleship-vue/blob/master/screenshots/battleship-vue-sockets.png?raw=true)  
 
 # phil-vue-battleship
 
