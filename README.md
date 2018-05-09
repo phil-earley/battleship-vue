@@ -1,6 +1,8 @@
 ![ss-bw.jpg](https://github.com/phil-earley/battleship-vue/blob/master/screenshots/battleship-vue-sockets.png?raw=true)  
 
-# phil-vue-battleship
+# vue-battleship
+
+## WIP
 
 Run via localhost:8080, and socket.io running on 3000 (npm start) will handle data accordingly.
 
